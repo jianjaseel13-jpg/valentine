@@ -49,22 +49,23 @@ button {
 }
 
 .photos img {
+ .photos img {
   position: absolute;
   width: 120px;
   height: 120px;
   object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  border-radius: 16px;
 }
 
-.p1 { top: -200px; left: 50%; transform: translateX(-50%); }
-.p2 { top: -120px; left: 15%; }
-.p3 { top: -120px; right: 15%; }
-.p4 { top: 100px; left: 5%; }
-.p5 { top: 100px; right: 5%; }
-.p6 { bottom: -150px; left: 20%; }
-.p7 { bottom: -150px; right: 20%; }
-.p8 { bottom: -250px; left: 50%; transform: translateX(-50%); }
+/* Positions (safe inside screen) */
+.p1 { top: 5%; left: 5%; }
+.p2 { top: 5%; right: 5%; }
+.p3 { top: 35%; left: 2%; }
+.p4 { top: 35%; right: 2%; }
+.p5 { bottom: 5%; left: 5%; }
+.p6 { bottom: 5%; right: 5%; }
+.p7 { top: 20%; left: 40%; }
+.p8 { bottom: 20%; right: 40%; }
 
 .heart {
   position: fixed;
@@ -118,7 +119,7 @@ button {
 
   <div id="result">
    <h1>Correct answer 😌💯</h1>
-<p>10 years later and you still have great taste hehe ❤️</p>
+<p>Congratulations. You're stuck with me forever ❤️</p>
     <img src="funny.gif">
   </div>
 
@@ -128,11 +129,20 @@ button {
 const noBtn = document.getElementById("no");
 
 noBtn.addEventListener("mouseover", () => {
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 50);
+  const buttonWidth = noBtn.offsetWidth;
+  const buttonHeight = noBtn.offsetHeight;
+
+  const maxX = window.innerWidth - buttonWidth - 20;
+  const maxY = window.innerHeight - buttonHeight - 20;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.position = "absolute";
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
 });
+
 
 document.getElementById("yes").onclick = () => {
   document.querySelector(".buttons").style.display = "none";
